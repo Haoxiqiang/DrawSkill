@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <org.opentalking.drawskill.Surface
+        android:id="@+id/surface"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="left"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/brush_property"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/foreground_picker_button"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:layout_marginLeft="10dip"
+                android:src="@drawable/button_background" />
+
+            <ImageView
+                android:id="@+id/background_picker_button"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginTop="10dip"
+                android:src="@drawable/button_background" />
+
+            <LinearLayout
+                android:layout_width="150dip"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dip"
+                android:background="@color/brush_property_bg"
+                android:orientation="vertical"
+                android:paddingBottom="10dip"
+                android:paddingLeft="6dip"
+                android:paddingRight="10dip"
+                android:paddingTop="10dip" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/opacity" />
+
+                <SeekBar
+                    android:id="@+id/brush_opacity_bar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/size" />
+
+                <SeekBar
+                    android:id="@+id/brush_size_bar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <com.capricorn.RayMenu
+            android:id="@+id/ray_menu"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp" />
+
+        <ImageView
+            android:id="@+id/menu_switcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="15dp"
+            android:src="@drawable/menu_switcher_button" />
+    </LinearLayout>
+
+</FrameLayout>
