@@ -2,13 +2,12 @@ package com.capricorn;
 
 
 import org.opentalking.drawskill.R;
+import org.opentalking.view.Fab;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -20,9 +19,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 public class RayMenu extends RelativeLayout {
+	
 	private RayLayout mRayLayout;
-
-	private ImageView mHintView;
+	private Fab mFab;
+	private OnItemClickListener itemListener;
 
 	public RayMenu(Context context) {
 		super(context);
@@ -42,25 +42,11 @@ public class RayMenu extends RelativeLayout {
 		li.inflate(R.layout.ray_menu, this);
 
 		mRayLayout = (RayLayout) findViewById(R.id.item_layout);
-
-		final ViewGroup controlLayout = (ViewGroup) findViewById(R.id.control_layout);
-		controlLayout.setClickable(true);
-		controlLayout.setOnTouchListener(new OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getAction() == MotionEvent.ACTION_DOWN) {
-					mHintView
-							.startAnimation(createHintSwitchAnimation(mRayLayout
-									.isExpanded()));
-					mRayLayout.switchState(true);
-				}
-
-				return false;
-			}
-		});
-
-		mHintView = (ImageView) findViewById(R.id.control_hint);
+	 	mFab = (Fab)findViewById(R.id.control_layout);
+	 	int holoBlue = getResources().getColor(android.R.color.holo_blue_light);
+		mFab.setFabColor(holoBlue);
+	 	mFab.setFabDrawable(getResources().getDrawable(R.drawable.ic_content_new));
+	 	mFab.setOnClickListener(new FabListener());
 	}
 
 	public void addItem(View item, OnClickListener listener) {
@@ -105,9 +91,8 @@ public class RayMenu extends RelativeLayout {
 						bindItemAnimation(item, false, 300);
 					}
 				}
-
+			 	mFab.showFab();
 				mRayLayout.invalidate();
-				mHintView.startAnimation(createHintSwitchAnimation(true));
 
 				if (listener != null) {
 					listener.onClick(viewClicked);
@@ -162,4 +147,40 @@ public class RayMenu extends RelativeLayout {
 		return animation;
 	}
 
+	class FabListener implements OnClickListener{
+
+		@Override
+		public void onClick(View v) {
+			mFab.startAnimation(createHintSwitchAnimation(mRayLayout.isExpanded()));
+			mRayLayout.switchState(true);
+			mFab.hideFab();
+		}
+		
+	}
+
+	public void setImageItems(int[] menuIcon) {
+		 int itemCount = menuIcon.length;
+		
+		for (int i = 0; i < itemCount; i++) {
+			ImageView item = new ImageView(this.getContext());
+			item.setImageResource(menuIcon[i]);
+			final int location = i;
+			addItem(item, new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if(itemListener!=null){
+						itemListener.onItemClick(v, location);
+					}
+				}
+			});// Add a menu item
+		}
+	}
+	
+	public void setOnItemClickListener(OnItemClickListener listener){
+		this.itemListener = listener;
+	}
+	
+	public interface OnItemClickListener{
+		public void onItemClick(View v,int location);
+	}
 }

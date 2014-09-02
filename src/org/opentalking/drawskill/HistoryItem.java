@@ -19,7 +19,7 @@ public final class HistoryItem {
     private HistoryItemState state = HistoryItemState.UNDO;
 
     public HistoryItem(IntBuffer oldSurface, Map<StylesFactory.BrushType, Object> oldBrushData) {
-        surfaceDiff = SurfaceDiff.Create(oldSurface, Sketcher.getInstance().getSurface().getBitmap());
+        surfaceDiff = SurfaceDiff.Create(oldSurface, MainActivity.getInstance().getSurface().getBitmap());
 
         if (null == surfaceDiff)
             this.oldSurfaceBuffer = (IntBuffer) oldSurface.rewind();
@@ -36,7 +36,7 @@ public final class HistoryItem {
     }
 
     private void swap() {
-        Bitmap bitmap = Sketcher.getInstance().getSurface().getBitmap();
+        Bitmap bitmap = MainActivity.getInstance().getSurface().getBitmap();
         Map<StylesFactory.BrushType, Object> brushData = new HashMap<StylesFactory.BrushType, Object>();
         StylesFactory.saveState(brushData);
 
@@ -53,7 +53,7 @@ public final class HistoryItem {
         StylesFactory.restoreState(oldBrushData);
         oldBrushData = brushData;
 
-        Sketcher.getInstance().getSurface().invalidate();
+        MainActivity.getInstance().getSurface().invalidate();
     }
 
     public HistoryItemState getState() {

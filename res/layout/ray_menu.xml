@@ -9,22 +9,13 @@
         android:layout_centerVertical="true"
         custom:childSize="45dip"
         custom:leftHolderWidth="60dp" />
-
-    <FrameLayout
+    
+    <org.opentalking.view.Fab
         android:id="@+id/control_layout"
-        android:layout_width="52dip"
-        android:layout_height="52dip"
-        android:layout_centerVertical="true"
-        android:layout_margin="4dp"
-        android:background="@drawable/composer_button" >
-
-        <ImageView
-            android:id="@+id/control_hint"
-            android:layout_width="52dip"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:duplicateParentState="true"
-            android:src="@drawable/composer_icn_plus" />
-    </FrameLayout>
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp" />
 
 </merge>

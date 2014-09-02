@@ -54,11 +54,11 @@ public class DrawController implements View.OnTouchListener {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 try {
-                    undoSurfaceBuffer = Sketcher.getInstance().getSurface().copyPixelsToBuffer(undoSurfaceBuffer);
+                    undoSurfaceBuffer = MainActivity.getInstance().getSurface().copyPixelsToBuffer(undoSurfaceBuffer);
                 } catch (OutOfMemoryError error) {
                     error.printStackTrace();
                     DocumentHistory.getInstance().clear();
-                    undoSurfaceBuffer = Sketcher.getInstance().getSurface().copyPixelsToBuffer(undoSurfaceBuffer);
+                    undoSurfaceBuffer = MainActivity.getInstance().getSurface().copyPixelsToBuffer(undoSurfaceBuffer);
                 }
                 brushData = new HashMap<StylesFactory.BrushType, Object>();
                 StylesFactory.saveState(brushData);
@@ -71,7 +71,7 @@ public class DrawController implements View.OnTouchListener {
             case MotionEvent.ACTION_UP:
                 HistoryItem item = new HistoryItem(undoSurfaceBuffer, brushData);
                 DocumentHistory.getInstance().pushNewItem(item);
-                Sketcher.getInstance().invalidateOptionsMenu();
+                MainActivity.getInstance().invalidateOptionsMenu();
                 break;
         }
         return true;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">茶</string>
+    <string name="app_name">DrawSkill</string>
     <string name="pick_a_color">Pick a Color</string>
     <string name="saving_to_sd_please_wait">Saving…</string>
     <string name="successfully_saved_to">Picture saved to "%s"</string>
@@ -42,10 +42,6 @@
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
 
-    <!-- About dialog -->
-    <string name="about_title">Sketcher 茶 (Cha)</string>
-    <string name="about_text">        Source code at &lt;a href="https://github.com/dkovalkov/Sketcher-Tab"&gt;GitHub&lt;/a&gt;.
-        &lt;a href="mailto:topoltop@gmail.com"&gt;topoltop@gmail.com&lt;/a&gt;&lt;p&gt;</string>
     <string name="opacity">Opacity</string>
     <string name="size">Size</string>
     

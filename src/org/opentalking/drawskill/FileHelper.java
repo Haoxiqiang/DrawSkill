@@ -23,9 +23,9 @@ public class FileHelper {
     private static final String FILENAME_PATTERN = "sketch_%04d.png";
     private static final String CUR_FILE_NUM = "cur_file_num";
 
-    private final Sketcher context;
+    private final MainActivity context;
 
-    public FileHelper(Sketcher context) {
+    public FileHelper(MainActivity context) {
         this.context = context;
     }
 
@@ -65,7 +65,7 @@ public class FileHelper {
     }
 
     private File getUniqueFilePath(File dir) {
-        SharedPreferences preferences = context.getSharedPreferences(Sketcher.PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences(MainActivity.PREFS_NAME, Context.MODE_PRIVATE);
         int curFileNum = preferences.getInt(CUR_FILE_NUM, 0);
 
         int freeFileNum = findFreeFileNum(curFileNum + 1, dir);

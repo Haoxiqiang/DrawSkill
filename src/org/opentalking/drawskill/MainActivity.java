@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Menu;
@@ -24,16 +25,16 @@ import org.opentalking.drawskill.colorpicker.Picker;
 import org.opentalking.drawskill.colorpicker.PickerDialog;
 import org.opentalking.drawskill.style.StyleBrush;
 import org.opentalking.drawskill.style.StylesFactory;
+import org.opentalking.view.Fab;
 
-public class Sketcher extends Activity {
-
+public class MainActivity extends Activity {
 
 	private final static int[] MENU_ICON = { R.drawable.brush_sketchy_button,
 			R.drawable.brush_shaded_button, R.drawable.brush_fur_button,
 			R.drawable.brush_web_button, R.drawable.brush_circles_button,
 			R.drawable.brush_ribbon_button, R.drawable.brush_simple_button };
 
-	private static Sketcher INSTANCE;
+	private static MainActivity INSTANCE;
 	private static final String PREF_OPACITY = "cur_opacity";
 	private static final String PREF_STYLE = "cur_brush_type";
 	private static final String PREF_COLOR = "cur_color";
@@ -45,28 +46,26 @@ public class Sketcher extends Activity {
 
 	public static final String PREFS_NAME = "preferences";
 
-	
-
 	private Surface surface;
 	private final FileHelper fileHelper = new FileHelper(this);
 	private View selectedBrushButton;
 	private View backgroundPickerButton;
 	private View foregroundPickerButton;
-	
-	private CountDownTimer actionBarTimer = new CountDownTimer(3000,1000) {
-		
+
+	private CountDownTimer actionBarTimer = new CountDownTimer(3000, 1000) {
+
 		@Override
 		public void onTick(long millisUntilFinished) {
-			
+
 		}
-		
+
 		@Override
 		public void onFinish() {
-			
+
 		}
 	};
 
-	public static Sketcher getInstance() {
+	public static MainActivity getInstance() {
 		return INSTANCE;
 	}
 
@@ -75,8 +74,8 @@ public class Sketcher extends Activity {
 		super.onCreate(savedInstanceState);
 
 		INSTANCE = this;
-		
-		setContentView(R.layout.actionbar_main);
+
+		setContentView(R.layout.action_main);
 
 		surface = (Surface) findViewById(R.id.surface);
 
@@ -86,21 +85,16 @@ public class Sketcher extends Activity {
 		initSliders();
 
 		RayMenu rayMenu = (RayMenu) findViewById(R.id.ray_menu);
-		final int itemCount = MENU_ICON.length;
-		for (int i = 0; i < itemCount; i++) {
-			ImageView item = new ImageView(this);
-			item.setImageResource(MENU_ICON[i]);
-
-			final int position = i;
-			rayMenu.addItem(item, new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					Toast.makeText(Sketcher.this, "position:" + position,
-							Toast.LENGTH_SHORT).show();
-				}
-			});// Add a menu item
-		}
+		rayMenu.setImageItems(MENU_ICON);
+		rayMenu.setOnItemClickListener(new  RayMenu.OnItemClickListener() {
+			@Override
+			public void onItemClick(View v, int location) {
+				// TODO Auto-generated method stub
+				StyleBrush styleBrush = StylesFactory.getStyle(DrawApplication.StyleButtonMap.get(location));
+				getSurface().setStyle(styleBrush);
+			}
+		});
+//		Toast.makeText(MainActivity.this, "position:" + position,Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -155,10 +149,13 @@ public class Sketcher extends Activity {
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		menu.findItem(R.id.menu_undo).setEnabled(DocumentHistory.getInstance().canUndo());
-		menu.findItem(R.id.menu_redo).setEnabled(DocumentHistory.getInstance().canRedo());
+		menu.findItem(R.id.menu_undo).setEnabled(
+				DocumentHistory.getInstance().canUndo());
+		menu.findItem(R.id.menu_redo).setEnabled(
+				DocumentHistory.getInstance().canRedo());
 		return super.onPrepareOptionsMenu(menu);
 	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -204,7 +201,7 @@ public class Sketcher extends Activity {
 		backgroundPickerButton = findViewById(R.id.background_picker_button);
 		backgroundPickerButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
-				new PickerDialog(Sketcher.this,
+				new PickerDialog(MainActivity.this,
 						new Picker.OnColorChangedListener() {
 							public void colorChanged(int color) {
 								getSurface().setBackgroundColor(color);
@@ -218,7 +215,7 @@ public class Sketcher extends Activity {
 		foregroundPickerButton = findViewById(R.id.foreground_picker_button);
 		foregroundPickerButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
-				new PickerDialog(Sketcher.this,
+				new PickerDialog(MainActivity.this,
 						new Picker.OnColorChangedListener() {
 							public void colorChanged(int color) {
 								getSurface().setPaintColor(color);
@@ -279,28 +276,29 @@ public class Sketcher extends Activity {
 	}
 
 	private void initStyle() {
-//		selectedBrushButton = findViewById(DrawApplication.StyleButtonMap.get(StylesFactory
-//				.getCurrentBrushType()));
-//		selectedBrushButton.setSelected(true);
+		// selectedBrushButton =
+		// findViewById(DrawApplication.StyleButtonMap.get(StylesFactory
+		// .getCurrentBrushType()));
+		// selectedBrushButton.setSelected(true);
 		backgroundPickerButton.setBackgroundColor(surface.getBackgroundColor());
 		foregroundPickerButton.setBackgroundColor(surface.getPaintColor());
 	}
 
-//	private void brushButtonOnClick(int buttonRes,
-//			final StylesFactory.BrushType brushType) {
-//		ImageButton button = (ImageButton) findViewById(buttonRes);
-//		button.setOnClickListener(new OnClickListener() {
-//			public void onClick(View view) {
-//				if (null != selectedBrushButton) {
-//					selectedBrushButton.setSelected(false);
-//				}
-//				selectedBrushButton = view;
-//				view.setSelected(true);
-//				StyleBrush styleBrush = StylesFactory.getStyle(brushType);
-//				getSurface().setStyle(styleBrush);
-//			}
-//		});
-//	}
+	// private void brushButtonOnClick(int buttonRes,
+	// final StylesFactory.BrushType brushType) {
+	// ImageButton button = (ImageButton) findViewById(buttonRes);
+	// button.setOnClickListener(new OnClickListener() {
+	// public void onClick(View view) {
+	// if (null != selectedBrushButton) {
+	// selectedBrushButton.setSelected(false);
+	// }
+	// selectedBrushButton = view;
+	// view.setSelected(true);
+	// StyleBrush styleBrush = StylesFactory.getStyle(brushType);
+	// getSurface().setStyle(styleBrush);
+	// }
+	// });
+	// }
 
 	private void restoreFromPrefs() {
 
@@ -323,4 +321,5 @@ public class Sketcher extends Activity {
 			brushType = StylesFactory.DEFAULT_BRUSH_TYPE;
 		surface.setStyle(StylesFactory.getStyle(brushType));
 	}
+
 }
