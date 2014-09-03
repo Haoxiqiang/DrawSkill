@@ -15,11 +15,10 @@
     <string name="are_you_sure">Are you sure that you want to clear the canvas?</string>
 
     <!-- Menu -->
-    <string name="brushes">Brushes</string>
-    <string name="color">Color</string>
     <string name="clear">Clear</string>
     <string name="send">Share</string>
     <string name="save">Save</string>
+    <string name="tool">Tool</string>
     <string name="about">About</string>
     <string name="undo">Undo</string>
     <string name="redo">Redo</string>

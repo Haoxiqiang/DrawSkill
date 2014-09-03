@@ -1,97 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
     <org.opentalking.drawskill.Surface
         android:id="@+id/surface"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_gravity="left"
-        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="vertical" >
 
+        <TextView
+            android:id="@+id/foreground_picker_button"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_marginLeft="10dip"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:drawableTop="@drawable/button_background"
+            android:text="画笔颜色" />
+
+        <TextView
+            android:id="@+id/background_picker_button"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_marginLeft="10dip"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:drawableTop="@drawable/button_background"
+            android:text="画板颜色" />
+
         <LinearLayout
-            android:id="@+id/brush_property"
-            android:layout_width="wrap_content"
+            android:layout_width="150dip"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <ImageView
-                android:id="@+id/foreground_picker_button"
-                android:layout_width="50dip"
-                android:layout_height="50dip"
-                android:layout_marginLeft="10dip"
-                android:src="@drawable/button_background" />
-
-            <ImageView
-                android:id="@+id/background_picker_button"
-                android:layout_width="50dip"
-                android:layout_height="50dip"
-                android:layout_marginLeft="10dip"
-                android:layout_marginTop="10dip"
-                android:src="@drawable/button_background" />
-
-            <LinearLayout
-                android:layout_width="150dip"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dip"
-                android:background="@color/brush_property_bg"
-                android:orientation="vertical"
-                android:paddingBottom="10dip"
-                android:paddingLeft="6dip"
-                android:paddingRight="10dip"
-                android:paddingTop="10dip" >
+                android:text="@string/opacity" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/opacity" />
+            <SeekBar
+                android:id="@+id/brush_opacity_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-                <SeekBar
-                    android:id="@+id/brush_opacity_bar"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/size" />
 
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/size" />
+            <SeekBar
+                android:id="@+id/brush_size_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
-                <SeekBar
-                    android:id="@+id/brush_size_bar"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@drawable/icon" />
+
+            <ImageView
+                android:id="@+id/brush_sketchy_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@drawable/brush_sketchy_button" />
+
+            <ImageView
+                android:id="@+id/brush_shaded_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@drawable/brush_shaded_button" />
+
+            <ImageView
+                android:id="@+id/brush_fur_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@drawable/brush_fur_button" />
+
+            <ImageView
+                android:id="@+id/brush_web_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@drawable/brush_web_button" />
+
+            <ImageView
+                android:id="@+id/brush_circles_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@drawable/brush_circles_button" />
+
+            <ImageView
+                android:id="@+id/brush_ribbon_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@drawable/brush_ribbon_button" />
+
+            <ImageView
+                android:id="@+id/brush_simple_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@drawable/brush_simple_button" />
         </LinearLayout>
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dip"
-        android:layout_gravity="bottom">
-
-        <com.capricorn.RayMenu
-            android:id="@+id/ray_menu"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/ray_size"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"/>
-
-        <ImageView
-            android:id="@+id/menu_switcher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="15dp"
-            android:layout_centerInParent="true"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="15dp"
-            android:src="@drawable/menu_switcher_button" />
-    </RelativeLayout>
 
 </FrameLayout>

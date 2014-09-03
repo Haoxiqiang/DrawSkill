@@ -52,6 +52,7 @@ public class MainActivity extends Activity {
 	private View backgroundPickerButton;
 	private View foregroundPickerButton;
 	private ActionBar actionBar;
+	private RayMenu mRayMenu;
 
 	private CountDownTimer actionBarTimer = new CountDownTimer(3000, 1000) {
 
@@ -85,18 +86,29 @@ public class MainActivity extends Activity {
 		initStyle();
 		initSliders();
 
-		RayMenu rayMenu = (RayMenu) findViewById(R.id.ray_menu);
-		rayMenu.setImageItems(MENU_ICON);
-		rayMenu.setOnItemClickListener(new  RayMenu.OnItemClickListener() {
+		
+//		mRayMenu = (RayMenu) findViewById(R.id.ray_menu);
+//		mRayMenu.setImageItems(MENU_ICON);
+//		mRayMenu.setOnItemClickListener(new  RayMenu.OnItemClickListener() {
+//			@Override
+//			public void onItemClick(Fab fab, int location) {
+//				StyleBrush styleBrush = StylesFactory.getStyle(DrawApplication.StyleButtonMap.get(location));
+//				getSurface().setStyle(styleBrush);
+//			}
+//		});
+		
+		findViewById(R.id.icon).setOnClickListener(new OnClickListener() {
+			
 			@Override
-			public void onItemClick(Fab fab, int location) {
-				StyleBrush styleBrush = StylesFactory.getStyle(DrawApplication.StyleButtonMap.get(location));
-				getSurface().setStyle(styleBrush);
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+//				mRayMenu.performClick();
 			}
 		});
 		
 		actionBar = getActionBar();
 		actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.drawable_half_transparent));
+		actionBar.setDisplayShowTitleEnabled(false);
 	}
 
 	@Override
@@ -160,6 +172,9 @@ public class MainActivity extends Activity {
 		case R.id.menu_send:
 			fileHelper.share();
 			return true;
+		case R.id.menu_tool:
+			fileHelper.share();
+			return true;
 		case R.id.menu_undo:
 			DocumentHistory.getInstance().undo();
 			invalidateOptionsMenu();
@@ -177,14 +192,14 @@ public class MainActivity extends Activity {
 	}
 
 	public void switchToolbars() {
-		View brushProperties = findViewById(R.id.brush_property);
-		if (actionBar.isShowing()) {
-			actionBar.hide();
-			brushProperties.setVisibility(View.GONE);
-		} else {
-			actionBar.show();
-			brushProperties.setVisibility(View.VISIBLE);
-		}
+//		View brushProperties = findViewById(R.id.brush_property);
+//		if (actionBar.isShowing()) {
+//			actionBar.hide();
+//			brushProperties.setVisibility(View.GONE);
+//		} else {
+//			actionBar.show();
+//			brushProperties.setVisibility(View.VISIBLE);
+//		}
 	}
 
 	private void initButtons() {
@@ -222,12 +237,12 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		View menuSwitcherImage = findViewById(R.id.menu_switcher);
-		menuSwitcherImage.setOnClickListener(new OnClickListener() {
-			public void onClick(View view) {
-				switchToolbars();
-			}
-		});
+//		View menuSwitcherImage = findViewById(R.id.menu_switcher);
+//		menuSwitcherImage.setOnClickListener(new OnClickListener() {
+//			public void onClick(View view) {
+//				switchToolbars();
+//			}
+//		});
 	}
 
 	private void initSliders() {
