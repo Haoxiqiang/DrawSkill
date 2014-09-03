@@ -75,7 +75,7 @@ public class ColorPickerView extends View {
 	 * The dp which the tracker of the hue or alpha panel
 	 * will extend outside of its bounds.
 	 */
-	private float		RECTANGLE_TRACKER_OFFSET = 2f;
+	private float		RECTANGLE_TRACKER_OFFSET = 1.5f;
 
 
 	private float 		mDensity = 1f;
@@ -188,7 +188,7 @@ public class ColorPickerView extends View {
 
 		mHueTrackerPaint.setColor(mSliderTrackerColor);
 		mHueTrackerPaint.setStyle(Style.STROKE);
-		mHueTrackerPaint.setStrokeWidth(2f * mDensity);
+		mHueTrackerPaint.setStrokeWidth(1f * mDensity);
 		mHueTrackerPaint.setAntiAlias(true);
 
 		mAlphaTextPaint.setColor(0xff1c1c1c);

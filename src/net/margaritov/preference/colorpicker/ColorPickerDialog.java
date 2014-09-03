@@ -37,10 +37,10 @@ import android.widget.GridView;
 public class ColorPickerDialog extends Dialog implements
 		ColorPickerView.OnColorChangedListener, View.OnClickListener, OnItemClickListener {
 
-	private static final int[] COLORS = {R.color.navy,R.color.blue,R.color.aqua,R.color.teal,
+	private static final int[] COLORS = {R.color.blue,R.color.aqua,R.color.teal,
 		R.color.olive,R.color.green,R.color.lime,R.color.yellow,
 		R.color.orange,R.color.red,R.color.maroon,R.color.fuchsia,
-		R.color.purple,R.color.black,R.color.gray,R.color.silver};
+		R.color.purple,R.color.black,R.color.navy,R.color.gray,R.color.silver};
 	
 	private ColorPickerView mColorPicker;
 	private GridView normalcolors;
