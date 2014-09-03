@@ -162,10 +162,10 @@ public class RayLayout extends ViewGroup {
 		final int toXDelta = frame.left - child.getLeft();
 		final int toYDelta = frame.top - child.getTop();
 
-		Interpolator interpolator = mExpanded ? new AccelerateInterpolator() : new OvershootInterpolator(1.5f);
-		final long startOffset = computeStartOffset(childCount, mExpanded, index, 0.1f, duration, interpolator);
+		Interpolator interpolator = expanded ? new AccelerateInterpolator() : new OvershootInterpolator(1.5f);
+		final long startOffset = computeStartOffset(childCount, expanded, index, 0.1f, duration, interpolator);
 
-		Animation animation = mExpanded ? createShrinkAnimation(0, toXDelta, 0, toYDelta, startOffset, duration,
+		Animation animation = expanded ? createShrinkAnimation(0, toXDelta, 0, toYDelta, startOffset, duration,
 				interpolator) : createExpandAnimation(0, toXDelta, 0, toYDelta, startOffset, duration, interpolator);
 
 		final boolean isLast = getTransformedIndex(expanded, childCount, index) == childCount - 1;
@@ -218,6 +218,7 @@ public class RayLayout extends ViewGroup {
 	 * @param showAnimation
 	 */
 	public void switchState(final boolean showAnimation) {
+		this.setVisibility(View.VISIBLE);
 		if (showAnimation) {
 			final int childCount = getChildCount();
 			for (int i = 0; i < childCount; i++) {
@@ -239,7 +240,6 @@ public class RayLayout extends ViewGroup {
 		for (int i = 0; i < childCount; i++) {
 			getChildAt(i).clearAnimation();
 		}
-
 		requestLayout();
 	}
 

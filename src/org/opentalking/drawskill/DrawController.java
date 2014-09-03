@@ -1,5 +1,6 @@
 package org.opentalking.drawskill;
 
+import android.annotation.SuppressLint;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,7 +15,9 @@ import java.util.Map;
 import org.opentalking.drawskill.style.Style;
 import org.opentalking.drawskill.style.StylesFactory;
 
+@SuppressLint("ClickableViewAccessibility")
 public class DrawController implements View.OnTouchListener {
+	
     public static final int INIT_BG_COLOR = Color.rgb(255, 250, 232);
     public static final int DEFAULT_OPACITY = 50;
     public static final float DEFAULT_WIDTH = 1;

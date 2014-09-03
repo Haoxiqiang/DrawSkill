@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
 
     <com.capricorn.RayLayout
-        xmlns:custom="http://schemas.android.com/apk/res-auto"
         android:id="@+id/item_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/ray_size"
         android:layout_centerVertical="true"
-        custom:childSize="45dip"
-        custom:leftHolderWidth="60dp" />
-    
+        android:paddingLeft="@dimen/ray_left_padding"
+        app:childSize="45dip"
+        app:leftHolderWidth="60dip" />
+
     <org.opentalking.view.Fab
         android:id="@+id/control_layout"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp" />
+        android:layout_width="@dimen/fab_size"
+        android:layout_height="@dimen/fab_size"
+        android:layout_centerVertical="true" />
 
-</merge>
+</RelativeLayout>

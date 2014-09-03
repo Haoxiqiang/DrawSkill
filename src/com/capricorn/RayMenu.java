@@ -136,11 +136,11 @@ public class RayMenu extends RelativeLayout {
 	}
 
 	private static Animation createHintSwitchAnimation(final boolean expanded) {
-		Animation animation = new RotateAnimation(expanded ? 45 : 0,
-				expanded ? 0 : 45, Animation.RELATIVE_TO_SELF, 0.5f,
+		Animation animation = new RotateAnimation(expanded ? 135 : 0,
+				expanded ? 0 : 135, Animation.RELATIVE_TO_SELF, 0.5f,
 				Animation.RELATIVE_TO_SELF, 0.5f);
 		animation.setStartOffset(0);
-		animation.setDuration(100);
+		animation.setDuration(150);
 		animation.setInterpolator(new DecelerateInterpolator());
 		animation.setFillAfter(true);
 
@@ -153,7 +153,6 @@ public class RayMenu extends RelativeLayout {
 		public void onClick(View v) {
 			mFab.startAnimation(createHintSwitchAnimation(mRayLayout.isExpanded()));
 			mRayLayout.switchState(true);
-			mFab.hideFab();
 		}
 		
 	}
@@ -169,7 +168,8 @@ public class RayMenu extends RelativeLayout {
 				@Override
 				public void onClick(View v) {
 					if(itemListener!=null){
-						itemListener.onItemClick(v, location);
+						itemListener.onItemClick(mFab, location);
+						mFab.hideFab();
 					}
 				}
 			});// Add a menu item
@@ -181,6 +181,6 @@ public class RayMenu extends RelativeLayout {
 	}
 	
 	public interface OnItemClickListener{
-		public void onItemClick(View v,int location);
+		public void onItemClick(Fab fab,int location);
 	}
 }

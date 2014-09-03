@@ -70,29 +70,28 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:gravity="center_horizontal"
-        android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dip"
+        android:layout_gravity="bottom">
 
         <com.capricorn.RayMenu
             android:id="@+id/ray_menu"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp" />
+            android:layout_height="@dimen/ray_size"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"/>
 
         <ImageView
             android:id="@+id/menu_switcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="15dp"
+            android:layout_centerInParent="true"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="15dp"
             android:src="@drawable/menu_switcher_button" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </FrameLayout>

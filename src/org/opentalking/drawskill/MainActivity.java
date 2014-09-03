@@ -4,25 +4,20 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.Toast;
-
 import com.capricorn.RayMenu;
 
 import java.io.File;
-import java.util.HashMap;
 
-import org.opentalking.drawskill.colorpicker.Picker;
-import org.opentalking.drawskill.colorpicker.PickerDialog;
+import net.margaritov.preference.colorpicker.ColorPickerDialog;
+import net.margaritov.preference.colorpicker.ColorPickerDialog.OnColorChangedListener;
+
 import org.opentalking.drawskill.style.StyleBrush;
 import org.opentalking.drawskill.style.StylesFactory;
 import org.opentalking.view.Fab;
@@ -48,9 +43,9 @@ public class MainActivity extends Activity {
 
 	private Surface surface;
 	private final FileHelper fileHelper = new FileHelper(this);
-	private View selectedBrushButton;
 	private View backgroundPickerButton;
 	private View foregroundPickerButton;
+	private ActionBar actionBar;
 
 	private CountDownTimer actionBarTimer = new CountDownTimer(3000, 1000) {
 
@@ -88,21 +83,14 @@ public class MainActivity extends Activity {
 		rayMenu.setImageItems(MENU_ICON);
 		rayMenu.setOnItemClickListener(new  RayMenu.OnItemClickListener() {
 			@Override
-			public void onItemClick(View v, int location) {
-				// TODO Auto-generated method stub
+			public void onItemClick(Fab fab, int location) {
 				StyleBrush styleBrush = StylesFactory.getStyle(DrawApplication.StyleButtonMap.get(location));
 				getSurface().setStyle(styleBrush);
 			}
 		});
-//		Toast.makeText(MainActivity.this, "position:" + position,Toast.LENGTH_SHORT).show();
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-		// We are loosing action bar color on resume. So did some hack.
-		switchToolbars();
-		// switchToolbars();
+		
+		actionBar = getActionBar();
+		actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.drawable_half_transparent));
 	}
 
 	@Override
@@ -149,10 +137,8 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		menu.findItem(R.id.menu_undo).setEnabled(
-				DocumentHistory.getInstance().canUndo());
-		menu.findItem(R.id.menu_redo).setEnabled(
-				DocumentHistory.getInstance().canRedo());
+		menu.findItem(R.id.menu_undo).setEnabled(DocumentHistory.getInstance().canUndo());
+		menu.findItem(R.id.menu_redo).setEnabled(DocumentHistory.getInstance().canRedo());
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -186,8 +172,6 @@ public class MainActivity extends Activity {
 
 	public void switchToolbars() {
 		View brushProperties = findViewById(R.id.brush_property);
-		ActionBar actionBar = getActionBar();
-
 		if (actionBar.isShowing()) {
 			actionBar.hide();
 			brushProperties.setVisibility(View.GONE);
@@ -201,28 +185,33 @@ public class MainActivity extends Activity {
 		backgroundPickerButton = findViewById(R.id.background_picker_button);
 		backgroundPickerButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
-				new PickerDialog(MainActivity.this,
-						new Picker.OnColorChangedListener() {
-							public void colorChanged(int color) {
-								getSurface().setBackgroundColor(color);
-								backgroundPickerButton
-										.setBackgroundColor(color);
-							}
-						}, getSurface().getBackgroundColor()).show();
+				ColorPickerDialog colorPickerDialog = new ColorPickerDialog(MainActivity.this, getSurface().getBackgroundColor());
+				colorPickerDialog.setOnColorChangedListener(new OnColorChangedListener() {
+					
+					@Override
+					public void onColorChanged(int color) {
+						getSurface().setBackgroundColor(color);
+						backgroundPickerButton.setBackgroundColor(color);
+//						getSurface().clearBitmap();
+					}
+				});
+				colorPickerDialog.show();
 			}
 		});
 
 		foregroundPickerButton = findViewById(R.id.foreground_picker_button);
 		foregroundPickerButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View view) {
-				new PickerDialog(MainActivity.this,
-						new Picker.OnColorChangedListener() {
-							public void colorChanged(int color) {
-								getSurface().setPaintColor(color);
-								foregroundPickerButton
-										.setBackgroundColor(color);
-							}
-						}, getSurface().getPaintColor()).show();
+				ColorPickerDialog colorPickerDialog = new ColorPickerDialog(MainActivity.this, getSurface().getPaintColor());
+				colorPickerDialog.setOnColorChangedListener(new OnColorChangedListener() {
+					
+					@Override
+					public void onColorChanged(int color) {
+						getSurface().setPaintColor(color);
+						foregroundPickerButton.setBackgroundColor(color);
+					}
+				});
+				colorPickerDialog.show();
 			}
 		});
 
@@ -276,29 +265,9 @@ public class MainActivity extends Activity {
 	}
 
 	private void initStyle() {
-		// selectedBrushButton =
-		// findViewById(DrawApplication.StyleButtonMap.get(StylesFactory
-		// .getCurrentBrushType()));
-		// selectedBrushButton.setSelected(true);
 		backgroundPickerButton.setBackgroundColor(surface.getBackgroundColor());
 		foregroundPickerButton.setBackgroundColor(surface.getPaintColor());
 	}
-
-	// private void brushButtonOnClick(int buttonRes,
-	// final StylesFactory.BrushType brushType) {
-	// ImageButton button = (ImageButton) findViewById(buttonRes);
-	// button.setOnClickListener(new OnClickListener() {
-	// public void onClick(View view) {
-	// if (null != selectedBrushButton) {
-	// selectedBrushButton.setSelected(false);
-	// }
-	// selectedBrushButton = view;
-	// view.setSelected(true);
-	// StyleBrush styleBrush = StylesFactory.getStyle(brushType);
-	// getSurface().setStyle(styleBrush);
-	// }
-	// });
-	// }
 
 	private void restoreFromPrefs() {
 

@@ -1,5 +1,6 @@
 package org.opentalking.drawskill;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -12,14 +13,12 @@ import android.view.SurfaceView;
 
 
 import java.nio.IntBuffer;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import org.opentalking.drawskill.style.Style;
-import org.opentalking.drawskill.style.StylesFactory;
+import org.opentalking.drawskill.tool.ILog;
 
 public final class Surface extends SurfaceView implements Callback {
-    private static final String TAG = "Surface";
 
     private DrawThread drawThread;
     private final Canvas drawCanvas = new Canvas();
@@ -34,7 +33,8 @@ public final class Surface extends SurfaceView implements Callback {
         setFocusable(true);
     }
 
-    @Override
+    @SuppressLint("ClickableViewAccessibility")
+	@Override
     public boolean onTouchEvent(MotionEvent event) {
         return drawController.onTouch(this, event);
     }
@@ -80,7 +80,6 @@ public final class Surface extends SurfaceView implements Callback {
 
     public void clearBitmap() {
         drawController.setUndoSurfaceBuffer(copyPixelsToBuffer(drawController.getUndoSurfaceBuffer()));
-
         bitmap.eraseColor(drawController.getBackgroundColor());
         drawController.clear();
     }
@@ -110,6 +109,7 @@ public final class Surface extends SurfaceView implements Callback {
     }
 
     public void setBackgroundColor(int color) {
+    		ILog.d("BackgroundColor is " + color);
         drawController.setBackgroundColor(color);
     }
 

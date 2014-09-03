@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#FFF"
+    android:orientation="horizontal"
+    android:padding="16dip" >
+
+    <net.margaritov.preference.colorpicker.ColorPickerView
+        android:id="@+id/color_picker_view"
+        android:layout_width="@dimen/colorpickerview_size"
+        android:layout_height="@dimen/colorpickerview_size"
+        android:layerType="hardware"
+        android:tag="landscape" />
+
+    <LinearLayout
+        android:layout_width="@dimen/colorpickerview_size"
+        android:layout_height="@dimen/colorpickerview_size"
+        android:orientation="vertical"
+        android:padding="10dip" >
+
+        <GridView
+            android:id="@+id/normalcolors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="2dip"
+            android:numColumns="4"
+            android:scrollbars="none"
+            android:verticalSpacing="2dip" />
+
+        <RelativeLayout
+            android:layout_width="@dimen/colorpickerview_size"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip" >
+
+            <net.margaritov.preference.colorpicker.ColorPickerPanelView
+                android:id="@+id/old_color_panel"
+                android:layout_width="@dimen/colorpicker_grid_item_text_size"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dip" />
+
+            <TextView
+                android:layout_width="@dimen/colorpicker_grid_item_text_size"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/old_color_panel"
+                android:text="OldColor" />
+
+            <net.margaritov.preference.colorpicker.ColorPickerPanelView
+                android:id="@+id/new_color_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_toRightOf="@id/old_color_panel" />
+
+            <TextView
+                android:layout_width="@dimen/colorpicker_grid_item_text_size"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_color_panel"
+                android:text="NewColor" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

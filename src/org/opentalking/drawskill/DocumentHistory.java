@@ -90,4 +90,13 @@ public class DocumentHistory {
     public boolean canRedo() {
         return canRedo;
     }
+    
+    public List<HistoryItem> getHistory(){
+    		return historyList;
+    }
+    public boolean restoreHistory(List<HistoryItem> list){
+	    	historyList.clear();
+	    	return historyList.addAll(list);
+    }
+    
 }

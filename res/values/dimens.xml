@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="ray_size">72dip</dimen>
+    <dimen name="fab_size">72dip</dimen>
+    <dimen name="ray_left_padding">36dip</dimen>
+
+    <!-- color picker -->
+    <dimen name="colorpickerview_size">150dip</dimen>
+    <dimen name="colorpicker_grid_item_size">50dip</dimen>
+    <dimen name="colorpicker_grid_item_text_size">20dip</dimen>
+
+</resources>
