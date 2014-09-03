@@ -16,6 +16,7 @@
 
 package net.margaritov.preference.colorpicker;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -40,6 +41,7 @@ import android.view.View;
  * setAlphaSliderVisible(boolean) to true.
  * @author Daniel Nilsson
  */
+@SuppressLint("ClickableViewAccessibility")
 public class ColorPickerView extends View {
 
 	private final static int	PANEL_SAT_VAL = 0;
@@ -105,6 +107,7 @@ public class ColorPickerView extends View {
 	private int 		mSliderTrackerColor = 0xff1c1c1c;
 	private int 		mBorderColor = 0xff6E6E6E;
 	private boolean		mShowAlphaPanel = false;
+	private boolean		mShowAlpha = true;
 
 	/*
 	 * To remember which panel that has the "focus" when
@@ -535,8 +538,6 @@ public class ColorPickerView extends View {
 					}
 
 					mAlpha = alpha;
-
-
 					update = true;
 				}
 
@@ -550,7 +551,7 @@ public class ColorPickerView extends View {
 		if(update){
 
 			if(mListener != null){
-				mListener.onColorChanged(Color.HSVToColor(mAlpha, new float[]{mHue, mSat, mVal}));
+				mListener.onColorChanged(getColor(mAlpha, new float[]{mHue, mSat, mVal}));
 			}
 
 			invalidate();
@@ -559,6 +560,14 @@ public class ColorPickerView extends View {
 
 
 		return super.onTrackballEvent(event);
+	}
+	
+	public int getColor(int alpha,float[] params){
+		return mShowAlpha?Color.HSVToColor(alpha, params):Color.HSVToColor(params);
+	}
+	
+	public void setAlphaColor(boolean needAlpha){
+		this.mShowAlpha = needAlpha;
 	}
 
 	@Override
@@ -595,7 +604,7 @@ public class ColorPickerView extends View {
 		if(update){
 
 			if(mListener != null){
-				mListener.onColorChanged(Color.HSVToColor(mAlpha, new float[]{mHue, mSat, mVal}));
+				mListener.onColorChanged(getColor(mAlpha, new float[]{mHue, mSat, mVal}));
 			}
 
 			invalidate();
@@ -831,7 +840,7 @@ public class ColorPickerView extends View {
 	 * @return the current color.
 	 */
 	public int getColor(){
-		return Color.HSVToColor(mAlpha, new float[]{mHue,mSat,mVal});
+		return getColor(mAlpha, new float[]{mHue,mSat,mVal});
 	}
 
 	/**
@@ -862,7 +871,7 @@ public class ColorPickerView extends View {
 		mVal = hsv[2];
 
 		if (callback && mListener != null) {
-			mListener.onColorChanged(Color.HSVToColor(mAlpha, new float[] { mHue, mSat, mVal }));
+			mListener.onColorChanged(getColor(mAlpha, new float[]{mHue, mSat, mVal}));
 		}
 
 		invalidate();

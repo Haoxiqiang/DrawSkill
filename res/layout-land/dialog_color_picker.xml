@@ -13,51 +13,57 @@
         android:layerType="hardware"
         android:tag="landscape" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="@dimen/colorpickerview_size"
         android:layout_height="@dimen/colorpickerview_size"
-        android:orientation="vertical"
         android:padding="10dip" >
 
         <GridView
             android:id="@+id/normalcolors"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/colorpicker_grid_item_grid_height"
+            android:layout_alignParentTop="true"
             android:horizontalSpacing="2dip"
             android:numColumns="4"
             android:scrollbars="none"
             android:verticalSpacing="2dip" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="@dimen/colorpickerview_size"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dip" >
+            android:layout_height="@dimen/colorpicker_grid_item_button_height"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/nowcolor"
+                android:textColor="@color/black"
+                android:textSize="@dimen/colorpicker_grid_item_text_size" />
 
             <net.margaritov.preference.colorpicker.ColorPickerPanelView
                 android:id="@+id/old_color_panel"
-                android:layout_width="@dimen/colorpicker_grid_item_text_size"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dip" />
+                android:layout_weight="1.1" />
 
             <TextView
-                android:layout_width="@dimen/colorpicker_grid_item_text_size"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/old_color_panel"
-                android:text="OldColor" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/newcolor"
+                android:textColor="@color/black"
+                android:textSize="@dimen/colorpicker_grid_item_text_size" />
 
             <net.margaritov.preference.colorpicker.ColorPickerPanelView
                 android:id="@+id/new_color_panel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dip"
-                android:layout_toRightOf="@id/old_color_panel" />
-
-            <TextView
-                android:layout_width="@dimen/colorpicker_grid_item_text_size"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/new_color_panel"
-                android:text="NewColor" />
-        </RelativeLayout>
-    </LinearLayout>
+                android:layout_weight="1.1" />
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

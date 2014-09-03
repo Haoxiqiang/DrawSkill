@@ -49,7 +49,9 @@
     
         <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>
-    <string name="press_color_to_apply">Press on Color to apply</string>    
+    <string name="press_color_to_apply">Press on Color to apply</string>
+    <string name="nowcolor">当前颜色</string>
+    <string name="newcolor">新的颜色</string>    
     
 
 </resources>

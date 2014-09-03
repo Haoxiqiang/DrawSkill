@@ -18,6 +18,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.opentalking.drawskill.activity.MainActivity;
+
 
 public class FileHelper {
     private static final String FILENAME_PATTERN = "sketch_%04d.png";

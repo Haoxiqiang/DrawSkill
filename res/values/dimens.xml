@@ -6,8 +6,11 @@
     <dimen name="ray_left_padding">36dip</dimen>
 
     <!-- color picker -->
-    <dimen name="colorpickerview_size">150dip</dimen>
+    <dimen name="colorpickerview_size">160dip</dimen>
+    <dimen name="colorpicker_grid_item_grid_height">110dip</dimen>
     <dimen name="colorpicker_grid_item_size">50dip</dimen>
-    <dimen name="colorpicker_grid_item_text_size">20dip</dimen>
+    <dimen name="colorpicker_grid_item_text_size">9sp</dimen>
+    <dimen name="colorpicker_grid_item_button_width">70dip</dimen>
+    <dimen name="colorpicker_grid_item_button_height">20dip</dimen>
 
 </resources>

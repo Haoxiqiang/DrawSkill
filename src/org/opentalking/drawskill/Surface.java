@@ -13,7 +13,6 @@ import android.view.SurfaceView;
 
 
 import java.nio.IntBuffer;
-import java.util.List;
 
 import org.opentalking.drawskill.style.Style;
 import org.opentalking.drawskill.tool.ILog;

@@ -7,6 +7,7 @@ import java.nio.IntBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.opentalking.drawskill.activity.MainActivity;
 import org.opentalking.drawskill.style.StylesFactory;
 
 /**

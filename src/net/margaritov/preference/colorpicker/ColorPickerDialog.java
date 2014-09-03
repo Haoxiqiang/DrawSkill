@@ -17,22 +17,25 @@
 package net.margaritov.preference.colorpicker;
 
 import org.opentalking.drawskill.R;
+import org.opentalking.drawskill.tool.ILog;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 
+@SuppressLint("InflateParams")
 public class ColorPickerDialog extends Dialog implements
-		ColorPickerView.OnColorChangedListener, View.OnClickListener {
+		ColorPickerView.OnColorChangedListener, View.OnClickListener, OnItemClickListener {
 
 	private static final int[] COLORS = {R.color.navy,R.color.blue,R.color.aqua,R.color.teal,
 		R.color.olive,R.color.green,R.color.lime,R.color.yellow,
@@ -75,20 +78,20 @@ public class ColorPickerDialog extends Dialog implements
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(layout);
 
-		mColorPicker = (ColorPickerView) layout
-				.findViewById(R.id.color_picker_view);
-		mOldColor = (ColorPickerPanelView) layout
-				.findViewById(R.id.old_color_panel);
-		mNewColor = (ColorPickerPanelView) layout
-				.findViewById(R.id.new_color_panel);
+		mColorPicker = (ColorPickerView) layout.findViewById(R.id.color_picker_view);
+		mOldColor = (ColorPickerPanelView) layout.findViewById(R.id.old_color_panel);
+		mNewColor = (ColorPickerPanelView) layout.findViewById(R.id.new_color_panel);
 		
 		normalcolors = (GridView) findViewById(R.id.normalcolors);
 		adapter = new NormalColorAdapter(this.getContext());
 		normalcolors.setAdapter(adapter);
+		normalcolors.setOnItemClickListener(this);
 
-		((LinearLayout) mOldColor.getParent()).setPadding(0, 0,
-				Math.round(mColorPicker.getDrawingOffset())*2, 0);
+//		((RelativeLayout) mOldColor.getParent()).setPadding(0, 0,
+//				Math.round(mColorPicker.getDrawingOffset())*2, 0);
 
+		mColorPicker.setAlphaColor(false);
+		
 		mOldColor.setOnClickListener(this);
 		mNewColor.setOnClickListener(this);
 		mColorPicker.setOnColorChangedListener(this);
@@ -100,6 +103,8 @@ public class ColorPickerDialog extends Dialog implements
 	@Override
 	public void onColorChanged(int color) {
 
+//		ILog.d("new color set color with " + color);
+		
 		mNewColor.setColor(color);
 
 		/*
@@ -153,6 +158,7 @@ public class ColorPickerDialog extends Dialog implements
 		mOldColor.setColor(savedInstanceState.getInt("old_color"));
 		mColorPicker.setColor(savedInstanceState.getInt("new_color"), true);
 	}
+	
 	class NormalColorAdapter extends BaseAdapter{
 
 		private Context mContext;
@@ -187,5 +193,14 @@ public class ColorPickerDialog extends Dialog implements
 			return convertView;
 		}
 		
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		int colorId = (Integer) adapter.getItem(position);
+		int colorValue = getContext().getResources().getColor(colorId);
+		ILog.d(" colorId is "+colorId + " colorValue is " + colorValue);
+		mNewColor.setColor(colorValue);
 	}
 }

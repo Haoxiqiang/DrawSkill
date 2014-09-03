@@ -1,4 +1,4 @@
-package org.opentalking.drawskill;
+package org.opentalking.drawskill.activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -18,6 +18,12 @@ import java.io.File;
 import net.margaritov.preference.colorpicker.ColorPickerDialog;
 import net.margaritov.preference.colorpicker.ColorPickerDialog.OnColorChangedListener;
 
+import org.opentalking.drawskill.DocumentHistory;
+import org.opentalking.drawskill.DrawApplication;
+import org.opentalking.drawskill.DrawController;
+import org.opentalking.drawskill.FileHelper;
+import org.opentalking.drawskill.R;
+import org.opentalking.drawskill.Surface;
 import org.opentalking.drawskill.style.StyleBrush;
 import org.opentalking.drawskill.style.StylesFactory;
 import org.opentalking.view.Fab;
@@ -190,9 +196,10 @@ public class MainActivity extends Activity {
 					
 					@Override
 					public void onColorChanged(int color) {
+						
 						getSurface().setBackgroundColor(color);
 						backgroundPickerButton.setBackgroundColor(color);
-//						getSurface().clearBitmap();
+						getSurface().clearBitmap();
 					}
 				});
 				colorPickerDialog.show();
